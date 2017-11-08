@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void	clean_split(char **s)
+void	clean_split(char **s)
 {
 	int	nbr;
 
@@ -54,6 +54,7 @@ static int  fill_point(t_point **point, char **str, t_env *env, int *k)
 	{
 		p.x = i;
 		p.y = env->nbry;
+        p.c = 0;
 		if (belong(str[i], ',') && !ft_hexa(str[i], &p))
 		{
 			clean_split(str);
@@ -64,7 +65,7 @@ static int  fill_point(t_point **point, char **str, t_env *env, int *k)
 			clean_split(str);
 			return(0);
 		}
-		p.c = choose_color(p.z, env);
+        (p.c == 0) ? p.c = choose_color(p.z, env) : 0;
 		isometric_calcul(&p, env);
 		(*point)[(*k)++] = p;
 	}

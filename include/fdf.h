@@ -39,7 +39,6 @@
 # define PINK		0xff0097
 # define WHITE		0xFFFFFF
 # define BROWN		0x654432
-# define WHITE 		0xFFFFFF
 
 typedef struct		s_point
 {
@@ -80,7 +79,7 @@ typedef struct      s_env
    	t_point			*p;
    	int 			bit;
    	int 			endian;
-   	char			*data;
+   	char 			*data;
    	int     		size;
    	int 			exist;
 }					t_env;
@@ -108,4 +107,5 @@ int					expose_hook(t_env *e);
 int					key_hook(int keycode, t_env *e);
 int 				zoom(int key, t_env *env);
 void				write_one_pixel(t_dot pt, t_env *env, int color);
+void                clean_split(char **s);
 #endif

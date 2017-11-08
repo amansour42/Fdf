@@ -23,13 +23,11 @@ int	main(int ac, char **av)
 		error(READERROR);
 	if (!(env.pt = collect(fd, &env, av[1])))
 		error(PARSEERROR);
-	//display_point(env.pt, 10);
 	env.mlx = mlx_init();
 	decale(&(env.pt), env);
 	if (env.max_x < 250 && env.max_y < 250)
 		right_zoom(env.pt, 1, &env);
 	define_dim(&env, av[1]);
-	//display_point(env.zpt, 10);
 	draw(&env);
 	//mlx_loop_hook(env.mlx, draw, &env);
 	//mlx_hook(env.win, 17, (1L << 17), quit, &env);

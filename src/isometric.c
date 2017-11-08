@@ -106,11 +106,11 @@ void	right_zoom(t_point *pt, int n, t_env *env)
 	env->max_x = max.x;
 	env->max_y = max.y;
 	//env->z = n;
-	printf("ZOOM = %d\n", n);
+	//printf("ZOOM = %d\n", n);
 	decale(&(env->zpt), *env);
-	printf("**POINT**\n");
-	display_point(env->zpt, env->nbrx * env->nbry);
-	printf("**POINT**\n");
+	//printf("**POINT**\n");
+	//display_point(env->zpt, env->nbrx * env->nbry);
+	//printf("**POINT**\n");
 	return ;
 	
 }

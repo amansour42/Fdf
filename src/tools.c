@@ -15,8 +15,8 @@
 
 int choose_color(int z, t_env *e)
 {
-	if (!e->exist)
-		return (WHITE);
+    if (e->exist)	      
+      return (WHITE);
 	if (z < 0)
 		return (BLUE);
 	if (z < 10)

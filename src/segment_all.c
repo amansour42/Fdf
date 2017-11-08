@@ -44,10 +44,7 @@ void	trace(t_env *env)
     	p = env->zpt;
     else
     	p = env->pt;
-    printf("JE SUIS DEDANS\n");
-    display_point(p, 10);
     seg_x(p, env);
-     printf("JE SUIS DEDANS\n");
 	k = -1;
     len = env->nbrx * (env->nbry - 1);
     while (++k < len)

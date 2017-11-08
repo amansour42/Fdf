@@ -25,8 +25,6 @@ int		key_hook(int keycode, t_env *e)
 		quit(e);
 	else if (keycode == 48) //tab = OK
 		mlx_clear_window(e->mlx, e->win);
-	//else if (keycode == 15) //rotate , r
-		//rotate(e);
 	else if (keycode == 17) //trace , t == ok
 		trace(e);
 	else if (keycode == 27 || keycode == 24) //zoom +, -
@@ -46,4 +44,3 @@ int		expose_hook(t_env *e)
 	draw(e);
 	return (0);
 }
-
