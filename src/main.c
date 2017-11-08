@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:14:47 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/06 13:42:26 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/08 14:43:53 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,18 @@ int	main(int ac, char **av)
 		error(READERROR);
 	if (!(env.pt = collect(fd, &env, av[1])))
 		error(PARSEERROR);
+	//display_point(env.pt, 10);
 	env.mlx = mlx_init();
+	decale(&(env.pt), env);
 	if (env.max_x < 250 && env.max_y < 250)
-      zoom(&(env.pt), 2, &env);
-    decale(&point, env);
-	define_dim(&env);
-	env.win = mlx_new_window(env.mlx, env.width, env.height, av[1]);
-	trace(env);
-	mlx_loop(env.mlx); 
-    return (0);
+		right_zoom(env.pt, 1, &env);
+	define_dim(&env, av[1]);
+	//display_point(env.zpt, 10);
+	draw(&env);
+	//mlx_loop_hook(env.mlx, draw, &env);
+	//mlx_hook(env.win, 17, (1L << 17), quit, &env);
+	mlx_expose_hook(env.win, expose_hook, &env);
+	mlx_key_hook(env.win, key_hook, &env);
+	mlx_loop(env.mlx);
+	return (0);
 }

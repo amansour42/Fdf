@@ -17,9 +17,6 @@ void decale(t_point **pt, t_env env)
     int     i;
 
     i = env.nbrx * env.nbry;
-    //printf("envminy = %lf/n", env.min_y);
-	(!env.min_x) ? env.min_x = -50 : 0;
-    (!env.min_y) ? env.min_y = -50 : 0; 
     if (!env.min_x && !env.min_y)
 		return ;
 	while (--i >= 0)
@@ -27,45 +24,93 @@ void decale(t_point **pt, t_env env)
 		(*pt)[i].x -= env.min_x;
 		(*pt)[i].y -= env.min_y; 
 	}
-    //display_point(*pt, env.nbrx * env.nbry);
 }
 
-void	zoom(t_point **pt, int n, t_env *env)
+static t_point *dupp(t_point *pt, t_env *env)
+{
+	t_point *p;
+	int		i;
+	int		j;
+
+	i = env->nbrx * env->nbry;
+	if (!(p = (t_point*)malloc(sizeof(t_point) * i)))
+		return (NULL);
+	j = -1;
+	while (++j < i)
+	{
+		p[j].x = pt[j].x;
+		p[j].y = pt[j].y;
+		p[j].c = pt[j].c;
+	}
+	return (p);
+}
+
+void	zoom_result(t_env *env)
+{
+	int		i;
+
+	if (!env->p)
+	{
+		if (env->zpt)
+			env->p = dupp(env->zpt, env);
+		else
+			env->p = dupp(env->pt, env);
+	}
+    i = env->nbrx * env->nbry;
+	while (--i >= 0)
+	{
+		if (env->z > 0)
+		{
+			env->p[i].x *= 2;
+    		env->p[i].y *= 2;
+    	}
+    	else
+    	{
+			env->p[i].x /= 2;
+    		env->p[i].y /= 2;
+    	}	
+	}
+}
+
+void	right_zoom(t_point *pt, int n, t_env *env)
 {
 	int     i;
-	t_point *r;
 	t_point max;
 	t_point min;
 
-    //printf("N  = %d\n", n);
-    i = env->nbrx * env->nbry;  
-	//printf("nbry  = %d\n", env->nbry); 
-    if (!(r = (t_point*)malloc(sizeof(t_point) * i)))
+    i = env->nbrx * env->nbry; 
+    if (!(env->zpt = (t_point*)malloc(sizeof(t_point) * i)))
         return ;
 	max.x = 0;
 	max.y = 0;
 	min.x = 0;
-	min.y = 0;;
+	min.y = 0;
 	while (--i >= 0)
 	{
-		r[i].x = (*pt)[i].x * n;
-    	r[i].y = (*pt)[i].y * n;
-		r[i].c = (*pt)[i].c;
-		(max.x < r[i].x) ? max.x = r[i].x : 0;
-		(max.y < r[i].y) ? max.y = r[i].y : 0;
-		(min.x > r[i].x) ? min.x = r[i].x : 0;
-		(min.y > r[i].y) ? min.y = r[i].y : 0;
+		env->zpt[i].x = pt[i].x * n;
+    	env->zpt[i].y = pt[i].y * n;
+		env->zpt[i].c = pt[i].c;
+		(max.x < env->zpt[i].x) ? max.x = env->zpt[i].x : 0;
+		(max.y < env->zpt[i].y) ? max.y = env->zpt[i].y : 0;
+		(min.x > env->zpt[i].x) ? min.x = env->zpt[i].x : 0;
+		(min.y > env->zpt[i].y) ? min.y = env->zpt[i].y : 0;
 	}
-	if ((max.y - min.y) > 600 || (max.x-min.x) > 1100)
+	if ((max.y - min.y) < 400 && (max.x-min.x) < 600)
 	{
-		free(*pt);
-		env->min_x = min.x;
-		env->min_y = min.y;
-		env->max_x = max.x;
-		env->max_y = max.y;
-		*pt = r;
-		return ;
+		free(env->zpt);
+		env->zpt = NULL;
+		right_zoom(pt, n + 1, env);
 	}
-	free(r);
-	zoom(pt, n + 1, env);
+	env->min_x = min.x;
+	env->min_y = min.y;
+	env->max_x = max.x;
+	env->max_y = max.y;
+	//env->z = n;
+	printf("ZOOM = %d\n", n);
+	decale(&(env->zpt), *env);
+	printf("**POINT**\n");
+	display_point(env->zpt, env->nbrx * env->nbry);
+	printf("**POINT**\n");
+	return ;
+	
 }

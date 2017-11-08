@@ -64,7 +64,7 @@ static int  fill_point(t_point **point, char **str, t_env *env, int *k)
 			clean_split(str);
 			return(0);
 		}
-		p.c = choose_color(p.z);
+		p.c = choose_color(p.z, env);
 		isometric_calcul(&p, env);
 		(*point)[(*k)++] = p;
 	}

@@ -18,5 +18,5 @@ void	display_point(t_point *p, int n)
 
     i = -1;
 	while (++i < n)
-		printf("x = %lf| y = %lf| z = %d|\n", p[i].x, p[i].y, p[i].z);
+		printf("x = %lf| y = %lf| z = %d| c =  %d\n", p[i].x, p[i].y, p[i].z, p[i].c);
 }

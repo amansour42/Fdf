@@ -24,7 +24,7 @@ LIB = libft/libft.a
 
 SRC = main.c collect.c display_point.c\
 	segment.c segment_all.c isometric.c define_dim.c\
-	error.c tools.c\
+	error.c tools.c hook.c zoom.c\
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(SRC:.c=.o))
 
