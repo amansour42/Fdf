@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 10:45:36 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 11:16:51 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:26:32 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void 		decale(t_point **pt, t_env *env)
 {
-	int     i;
+	int i;
 
 	i = NBR;
 	if (!env->min_x && !env->min_y)
@@ -28,7 +28,7 @@ void 		decale(t_point **pt, t_env *env)
 
 t_point		*dupp(t_point *pt, t_env *env)
 {
-	t_point *p;
+	t_point	*p;
 	int		j;
 
 	if (!(p = (t_point*)malloc(sizeof(t_point) * NBR)))
@@ -85,7 +85,7 @@ void	write_one_pixel(t_dot pt, t_env *env, int color)
 	    b = (color & 0xFF0000) >> 16;
 	    g = (color & 0xFF00) >> 8;
 	    r = (color & 0xFF);
-    }
+	}
 	if (pt.x >= 0 && pt.y >= 0 && pt.x < env->width && pt.y < env->height)
 	{
 		env->data[pt.y * env->size + pt.x * (env->bit / 8)] = r;

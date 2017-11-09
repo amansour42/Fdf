@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:03:36 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:14:53 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:28:26 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <math.h>
 # include "../minilibx/mlx.h"
 # define PI			3.14
-# define WIDTH		1000
-# define HEIGHT		800
+# define WIDTH		1300
+# define HEIGHT		900
 # define PHI		(PI / 180) * 30
 # define A			(PI / 180) * 120
 # define R			(PI / 4)

@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:00:03 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:16:29 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:27:16 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	zoom_result(t_env *env)
 
 static void	zoom_instr(t_env *env, int i, int n, t_limit *l)
 {
-		env->zpt[i].x = env->pt[i].x * n;
-		env->zpt[i].y = env->pt[i].y * n;
-		env->zpt[i].c = env->pt[i].c;
-		((l->max).x < env->zpt[i].x) ? (l->max).x = env->zpt[i].x : 0;
-		((l->max).y < env->zpt[i].y) ? (l->max).y = env->zpt[i].y : 0;
-		((l->min).x > env->zpt[i].x) ? (l->min).x = env->zpt[i].x : 0;
-		((l->min).y > env->zpt[i].y) ? (l->min).y = env->zpt[i].y : 0;
+	env->zpt[i].x = env->pt[i].x * n;
+	env->zpt[i].y = env->pt[i].y * n;
+	env->zpt[i].c = env->pt[i].c;
+	((l->max).x < env->zpt[i].x) ? (l->max).x = env->zpt[i].x : 0;
+	((l->max).y < env->zpt[i].y) ? (l->max).y = env->zpt[i].y : 0;
+	((l->min).x > env->zpt[i].x) ? (l->min).x = env->zpt[i].x : 0;
+	((l->min).y > env->zpt[i].y) ? (l->min).y = env->zpt[i].y : 0;
 }
 
 void	right_zoom(int n, t_env *env)

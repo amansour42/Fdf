@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 15:57:24 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/08 14:39:50 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:24:40 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ int		quit(t_env *e)
 
 int		key_hook(int keycode, t_env *e)
 {
-	printf("KEY PRESSED = %d\n", keycode);
-	if (keycode == 53 || keycode == 12) //esc && q = OK
+	if (keycode == 53 || keycode == 12)
 		quit(e);
-	else if (keycode == 48) //tab = OK
+	else if (keycode == 48)
 		mlx_clear_window(e->mlx, e->win);
-	else if (keycode == 17) //trace , t == ok
+	else if (keycode == 17)
 		trace(e);
-	else if (keycode == 27 || keycode == 24) //zoom +, -
+	else if (keycode == 27 || keycode == 24)
 		zoom(keycode, e);
-    else if (keycode == 15) //roate
-	   rotate(e);  
-    return (0);
+	else if (keycode == 15)
+		rotate(e);
+	return (0);
 }
 
 void	init_imag(t_env *e)

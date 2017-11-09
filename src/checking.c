@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 09:04:12 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 11:48:33 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:23:56 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int			checking(int fd, t_env *env)
 	}
 	env->nbry += 1;
 	free(c.str);
-	printf("NBRX = %d\nNBRY = %d\nDimZ = %d\n", env->nbrx, env->nbry, env->dim_z);
 	return (1);
 }
