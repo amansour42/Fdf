@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:14:47 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/08 14:43:53 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 10:04:18 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ int	main(int ac, char **av)
 		error(USAGE);
 	if ((fd = ft_open(av[1])) == -1)
 		error(READERROR);
-	if (!(env.pt = collect(fd, &env, av[1])))
+	if (!checking(fd, &env))
 		error(PARSEERROR);
+	close(fd);
+	fd = ft_open(av[1]);
+	stocking(fd, &env);
+	(!env.pt) ? error(PARSEERROR) : 0;
 	env.mlx = mlx_init();
 	decale(&(env.pt), env);
+	env.win = mlx_new_window(env.mlx, env.width, env.height, av[1]);
 	if (env.max_x < 250 && env.max_y < 250)
 		right_zoom(env.pt, 1, &env);
-	define_dim(&env, av[1]);
 	draw(&env);
-	//mlx_loop_hook(env.mlx, draw, &env);
-	//mlx_hook(env.win, 17, (1L << 17), quit, &env);
 	mlx_expose_hook(env.win, expose_hook, &env);
 	mlx_key_hook(env.win, key_hook, &env);
 	mlx_loop(env.mlx);
