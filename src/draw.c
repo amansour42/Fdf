@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:14:55 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 11:56:02 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:54:31 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	seg_x(t_point *pt, t_env *env)
 {
 	int		i;
-	int     k;
-	int     j;
+	int		k;
+	int		j;
 
 	k = 1;
 	j = 0;
@@ -32,10 +32,10 @@ static void	seg_x(t_point *pt, t_env *env)
 	}
 }
 
-void	trace(t_env *env)
+void		trace(t_env *env)
 {
-	int     k;
-	int     len;
+	int		k;
+	int		len;
 	t_point *p;
 
 	if (env->p)
@@ -53,7 +53,7 @@ void	trace(t_env *env)
 	mlx_put_image_to_window(env->mlx, env->win, env->imag, 0, 0);
 }
 
-int		draw(t_env *e)
+int			draw(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	init_imag(e);

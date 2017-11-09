@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 10:45:36 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:26:32 by amansour         ###   ########.fr       */
+/*   Created: 2017/11/09 12:45:14 by amansour          #+#    #+#             */
+/*   Updated: 2017/11/09 12:48:42 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void 		decale(t_point **pt, t_env *env)
+void		decale(t_point **pt, t_env *env)
 {
 	int i;
 
@@ -22,8 +22,9 @@ void 		decale(t_point **pt, t_env *env)
 	while (--i >= 0)
 	{
 		(*pt)[i].x -= env->min_x;
-		(*pt)[i].y -= env->min_y; 
+		(*pt)[i].y -= env->min_y;
 	}
+	return ;
 }
 
 t_point		*dupp(t_point *pt, t_env *env)
@@ -43,7 +44,7 @@ t_point		*dupp(t_point *pt, t_env *env)
 	return (p);
 }
 
-int 		choose_color(int z, t_env *e)
+int			choose_color(int z, t_env *e)
 {
 	if (e->exist)
 		return (WHITE);
@@ -54,15 +55,15 @@ int 		choose_color(int z, t_env *e)
 	if (z < 100)
 		return (YELLOW);
 	if (z < 1000)
-		return(BROWN);
+		return (BROWN);
 	return (0);
 }
 
-void 		isometric_calcul(t_point *pt, t_env *env)
+void		isometric_calcul(t_point *pt, t_env *env)
 {
-	double  x;
-	double  y;
-	int     p;
+	double	x;
+	double	y;
+	int		p;
 
 	p = 1;
 	x = p * (pt->x * cos(PHI) + pt->y * cos(PHI + A)) + pt->z * cos(PHI - A);
@@ -73,8 +74,10 @@ void 		isometric_calcul(t_point *pt, t_env *env)
 	(env->min_y > y) ? env->min_y = y : 0;
 	(env->max_x < x) ? env->max_x = x : 0;
 	(env->max_y < y) ? env->max_y = y : 0;
+	return ;
 }
-void	write_one_pixel(t_dot pt, t_env *env, int color)
+
+void		write_one_pixel(t_dot pt, t_env *env, int color)
 {
 	unsigned int	r;
 	unsigned int	g;
@@ -82,14 +85,15 @@ void	write_one_pixel(t_dot pt, t_env *env, int color)
 
 	if (color)
 	{
-	    b = (color & 0xFF0000) >> 16;
-	    g = (color & 0xFF00) >> 8;
-	    r = (color & 0xFF);
+		b = (color & 0xFF0000) >> 16;
+		g = (color & 0xFF00) >> 8;
+		r = (color & 0xFF);
 	}
 	if (pt.x >= 0 && pt.y >= 0 && pt.x < env->width && pt.y < env->height)
 	{
 		env->data[pt.y * env->size + pt.x * (env->bit / 8)] = r;
 		env->data[pt.y * env->size + pt.x * (env->bit / 8) + 1] = g;
-		env->data[pt.y * env->size + pt.x * (env->bit / 8) + 2] = b; 
+		env->data[pt.y * env->size + pt.x * (env->bit / 8) + 2] = b;
 	}
+	return ;
 }

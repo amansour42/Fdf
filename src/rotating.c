@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 11:03:28 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:23:07 by amansour         ###   ########.fr       */
+/*   Created: 2017/11/09 12:52:50 by amansour          #+#    #+#             */
+/*   Updated: 2017/11/09 12:52:53 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	rotate_result(t_env *env)
 	{
 		x = env->p[i].x;
 		y = env->p[i].y;
-		env->p[i].x  = x * cos(R) - y * sin(R);
-		env->p[i].y  = x * sin(R) + y * cos(R);
+		env->p[i].x = x * cos(R) - y * sin(R);
+		env->p[i].y = x * sin(R) + y * cos(R);
 		(env->min_x > env->p[i].x) ?
 		env->min_x = env->p[i].x : 0;
 		(env->min_y > env->p[i].y) ?

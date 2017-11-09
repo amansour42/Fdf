@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:00:03 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:27:16 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:44:05 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	zoom_instr(t_env *env, int i, int n, t_limit *l)
 	((l->min).y > env->zpt[i].y) ? (l->min).y = env->zpt[i].y : 0;
 }
 
-void	right_zoom(int n, t_env *env)
+void		right_zoom(int n, t_env *env)
 {
 	int		i;
 	t_limit	l;
