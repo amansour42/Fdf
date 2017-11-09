@@ -29,7 +29,9 @@ int		key_hook(int keycode, t_env *e)
 		trace(e);
 	else if (keycode == 27 || keycode == 24) //zoom +, -
 		zoom(keycode, e);
-	return (0);
+    else if (keycode == 15) //roate
+	   rotate(e);  
+    return (0);
 }
 
 void	init_imag(t_env *e)

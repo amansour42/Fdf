@@ -18,71 +18,21 @@ void	init_env(t_env *env)
 
 void	define_dim(t_env *env, char *str)
 {
-	env->height = HEIGHT;//(env->max_y - env->min_y)  + 300;
-	env->width =  WIDTH;//(env->max_x - env->min_x) + 300;
+	env->height = HEIGHT;
+	env->width =  WIDTH;
 	env->win = mlx_new_window(env->mlx, env->width, env->height, str);
 }
-
-/*
-static int check_line(char *str, t_env *env, int *rest)
+static void  clean(t_check c)
 {
-    int i;
-    //int f;
-    int n;
-    //int dim;
+    clean_split(c.s);
+    clean_split(c.line);
+    free(c.str);
+    if (c.rest)
+        free(c.rest);
+    free(c.s1);
 
-	n = 0;
-	i = -1;
-	//dim = 0;
-	//f =  *rest;
-	printf("REST = %d\n", *rest);
-	printf("%s\n", str);
-    while(str[++i])
-	{
-                     
-		if (str[i] == ' ')
-		{
-            
-			++(*rest);
-            ++i;
-			while (str[i] && belong("0123456789xabcdef,", str[i]))
-            {
-                printf("%c", str[i]); 
-				++i;
-            }
-            printf("\n");
-			//(dim > env->dim_z) ? env->dim_z = dim  : 0;
-            
-            printf("I = %d\n", i);
-            printf("str sortie = %c\n", str[i]);
-        }
-        if (str[i] == '\n')
-		{
-			printf("nbr_x = %d\n", env->nbrx);
-            (env->nbrx == 0) ? env->nbrx = *rest : 0;
-			if (env->nbrx != *rest && *rest)
-			{
-				printf("rest = %d", *rest);
-				return (0);
-			}
-			++n;
-			//f = 0;
-            *rest = 0;
-		}
-        else if (str[i] == ' ')
-            ++i;
-       
-    }
-	env->nbry += n;
-	if (!env->nbr)
-		*rest = f;
-	else
-	rest = f;
-	printf("ok\n");
-    return (1);
-}
-*/
-static  int length(char **str, t_env *env)
+}             
+static int  length(char **str, t_env *env)
 {
     int len;
 
@@ -94,35 +44,66 @@ static  int length(char **str, t_env *env)
         ++len;
     }
     return (len);
+}          
+
+static void  check(t_check *c, t_env *env)
+{
+    int i;
+
+    i = ft_strlen(c->s1) - 1; 
+    while (i >= 0 && c->s1[i] != '\n')
+        i -= 1;
+    free(c->rest);
+    c->rest = ft_strdup(c->s1 + i + 1);
+    c->j = (c->rest) ? -1 : 0;    
+    c->line = ft_strsplit(c->s1, '\n');
+    env->nbry += length(c->line, env) + c->j;
+    i = -1;
+    while (c->line[++i])
+    {
+        if (c->j == -1 && !(c->line[i + 1]))
+            break ;
+        c->s = ft_strsplit(c->line[i], ' ');
+        (!(env->nbrx)) ? env->nbrx = length(c->s, env): 0;
+        if (env->nbrx != length(c->s, env))
+        {
+            error(PARSEERROR);
+            clean(*c);
+        }
+        clean_split(c->s);
+    }
+    clean_split(c->line);
+    free(c->s1);
 }
+
+
+
 
 int     nbr_line(int fd, t_env *env)
 {
-	char    *str;
+	t_check c;
 	int     ret;
-	int     rest;
-    char    **s;
 
-	rest = 0;
+    c.j = 0;
 	init_env(env);
-	while ((ret = get_next_line(fd, &str)))
-	{
-		if (ret == -1)
-			return (0);
-        s = ft_strsplit(str, ' ');
-        if (str)
-		{
-		    (env->nbrx == 0) ? env->nbrx = length(s, env) : 0;
-			if (env->nbrx != length(s, env))
-			{
-				printf("ERROR\n");
-				return (0);
-            }
-            clean_split(s);
-		}
-        free(str);
-        env->nbry += 1;
-	}
+    if (!(c.str = (char*)malloc(sizeof(char) * (BUFF + 1))))
+        return (0);
+	c.rest = NULL;
+    while ((ret = read(fd, c.str, BUFF)))
+	{   
+        c.str[ret] = '\0';
+        c.s1 =  (c.rest) ? ft_strjoin(c.rest, c.str) : ft_strdup(c.str);
+        if (!belong(c.s1, '\n'))
+        {   
+            if (c.rest)
+                free(c.rest);
+            c.rest = c.s1;
+            continue;
+        }
+        check(&c, env);
+    }
+    env->nbry += 1;
+    free(c.str);
     printf("NBRX = %d\nNBRY = %d\nDimZ = %d\n", env->nbrx, env->nbry, env->dim_z); 
     return (1);
 }

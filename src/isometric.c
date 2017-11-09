@@ -72,6 +72,31 @@ void	zoom_result(t_env *env)
 	}
 }
 
+void	rotate_result(t_env *env)
+{
+	int		i;
+    double  x;
+    double  y;
+
+	if (!env->p)
+	{
+		if (env->zpt)
+			env->p = dupp(env->zpt, env);
+		else
+			env->p = dupp(env->pt, env);
+	}
+    i = env->nbrx * env->nbry;
+	while (--i >= 0)
+	{
+            x = env->p[i].x;
+            y = env->p[i].y;
+			env->p[i].x  = x * cos(R) - y * sin(R);
+    		env->p[i].y  = x * sin(R) + y * cos(R);
+            (env->min_x > env->p[i].x) ? env->min_x = env->p[i].x : 0;
+            (env->min_y > env->p[i].y) ? env->min_y = env->p[i].y : 0; 
+	}
+    decale(&(env->p), *env);
+} 
 void	right_zoom(t_point *pt, int n, t_env *env)
 {
 	int     i;

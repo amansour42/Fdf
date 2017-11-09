@@ -28,11 +28,12 @@
 # define HEIGHT		800
 # define PHI		(PI / 180) * 30
 # define A			(PI / 180) * 120
+# define R          (PI / 4)
 # define USAGE		"Usage: {PATH}/fdf some_file.fdf"
 # define READERROR	"Read error"
 # define PARSEERROR	"Parse error"
 # define NOTFOUND	"File not found or wrong format"
-
+# define BUFF       2048
 # define GREEN		0x009688
 # define YELLOW		0xfeff77
 # define BLUE		0x4162ff
@@ -47,6 +48,17 @@ typedef struct		s_point
 	int				z;
 	int				c;
 }					t_point;
+
+typedef struct      s_check
+{
+    char            *str;
+    char            **line;
+    char            **s;
+    char            *rest;
+    char            *s1;
+    int             j;
+}                   t_check;
+
 typedef struct		s_dot
 {
 	int				x;
@@ -108,4 +120,6 @@ int					key_hook(int keycode, t_env *e);
 int 				zoom(int key, t_env *env);
 void				write_one_pixel(t_dot pt, t_env *env, int color);
 void                clean_split(char **s);
+void                 rotate_result(t_env *env);
+int                rotate(t_env *env);
 #endif

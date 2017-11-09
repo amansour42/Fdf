@@ -12,6 +12,14 @@ int	zoom(int keycode, t_env *env)
 	return (0);
 }
 
+int	rotate(t_env *env)
+{
+	mlx_clear_window(env->mlx, env->win);
+    rotate_result(env);
+    draw(env);
+	return (0);
+}
+
 void	write_one_pixel(t_dot pt, t_env *env, int color)
 {
 	unsigned int	r;
