@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:00:03 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 12:01:06 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:16:29 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,48 +36,50 @@ static void	zoom_result(t_env *env)
 	}
 }
 
-void	right_zoom(t_point *pt, int n, t_env *env)
+static void	zoom_instr(t_env *env, int i, int n, t_limit *l)
 {
-	int     i;
-	t_point max;
-	t_point min;
+		env->zpt[i].x = env->pt[i].x * n;
+		env->zpt[i].y = env->pt[i].y * n;
+		env->zpt[i].c = env->pt[i].c;
+		((l->max).x < env->zpt[i].x) ? (l->max).x = env->zpt[i].x : 0;
+		((l->max).y < env->zpt[i].y) ? (l->max).y = env->zpt[i].y : 0;
+		((l->min).x > env->zpt[i].x) ? (l->min).x = env->zpt[i].x : 0;
+		((l->min).y > env->zpt[i].y) ? (l->min).y = env->zpt[i].y : 0;
+}
 
-	i = env->nbrx * env->nbry; 
+void	right_zoom(int n, t_env *env)
+{
+	int		i;
+	t_limit	l;
+
+	i = NBR;
 	if (!(env->zpt = (t_point*)malloc(sizeof(t_point) * i)))
 		return ;
-	max.x = 0;
-	max.y = 0;
-	min.x = 0;
-	min.y = 0;
+	(l.max).x = 0;
+	(l.max).y = 0;
+	(l.min).x = 0;
+	(l.min).y = 0;
 	while (--i >= 0)
-	{
-		env->zpt[i].x = pt[i].x * n;
-		env->zpt[i].y = pt[i].y * n;
-		env->zpt[i].c = pt[i].c;
-		(max.x < env->zpt[i].x) ? max.x = env->zpt[i].x : 0;
-		(max.y < env->zpt[i].y) ? max.y = env->zpt[i].y : 0;
-		(min.x > env->zpt[i].x) ? min.x = env->zpt[i].x : 0;
-		(min.y > env->zpt[i].y) ? min.y = env->zpt[i].y : 0;
-	}
-	if ((max.y - min.y) < 400 && (max.x-min.x) < 600)
+		zoom_instr(env, i, n, &l);
+	if ((l.max).y - (l.min).y < 400 && ((l.max).x - (l.min).x) < 600)
 	{
 		free(env->zpt);
 		env->zpt = NULL;
-		right_zoom(pt, n + 1, env);
+		right_zoom(n + 1, env);
 	}
-	env->min_x = min.x;
-	env->min_y = min.y;
-	env->max_x = max.x;
-	env->max_y = max.y;
+	env->min_x = (l.min).x;
+	env->min_y = (l.min).y;
+	env->max_x = (l.max).x;
+	env->max_y = (l.max).y;
 	decale(&(env->zpt), env);
 }
 
 int			zoom(int keycode, t_env *env)
 {
 	mlx_clear_window(env->mlx, env->win);
-	if (keycode == 24)//+
+	if (keycode == 24)
 		env->z = 1;
-	else if (keycode == 27) //-
+	else if (keycode == 27)
 		env->z = -1;
 	zoom_result(env);
 	draw(env);

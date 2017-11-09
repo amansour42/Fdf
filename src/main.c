@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:14:47 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 11:51:20 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:18:36 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 	env.win = mlx_new_window(env.mlx, env.width, env.height, av[1]);
 	decale(&(env.pt), &env);
 	if (env.max_x < 250 && env.max_y < 250)
-		right_zoom(env.pt, 1, &env);
+		right_zoom(2, &env);
 	draw(&env);
 	mlx_expose_hook(env.win, expose_hook, &env);
 	mlx_key_hook(env.win, key_hook, &env);

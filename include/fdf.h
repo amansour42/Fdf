@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:03:36 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 11:33:54 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 12:14:53 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct		s_dot
 	int				c;
 }					t_dot;
 
+typedef struct		s_limit
+{
+	t_point			min;
+	t_point			max;
+}					t_limit;
+
 typedef struct      s_env
 {
 	void			*mlx;
@@ -112,7 +118,7 @@ void				write_one_pixel(t_dot pt, t_env *env, int color);
  * zoom.c
 */
 int 				zoom(int key, t_env *env);
-void				right_zoom(t_point *pt, int n, t_env *env);
+void				right_zoom(int n, t_env *env);
 
 /*
  *rotating
