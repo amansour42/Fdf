@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 09:11:31 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 10:30:33 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 10:33:24 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	fill_point(t_point **point, char **str, t_env *env, int *k)
 	{
 		p.x = i;
 		p.y = (int)((*k) / NBRX);
-		//printf("I = %d Y = %lf K = %d\n", i, p.y, *k);
 		p.c = 0;
 		if (belong(str[i], ',') && !ft_hexa(str[i], &p))
 		{
@@ -121,7 +120,6 @@ void	stocking(int fd, t_env *env)
 		c.s1 =  (c.rest) ? ft_strjoin(c.rest, c.str) : ft_strdup(c.str);
 		if (!belong(c.s1, '\n'))
 		{
-			printf("ICI\n");
 			if (c.rest)
 				free(c.rest);
 			c.rest = ft_strdup(c.s1);
@@ -131,6 +129,5 @@ void	stocking(int fd, t_env *env)
 			return ;
 	}
 	free(c.str);
-	//clean(c);
 	printf("env_minx = %lf\n, env_miny = %lf\n", env->min_x, env->min_y);
 }
