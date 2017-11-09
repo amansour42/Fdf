@@ -6,7 +6,7 @@
 #    By: amansour <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/01 10:00:28 by amansour          #+#    #+#              #
-#    Updated: 2017/11/09 09:10:45 by amansour         ###   ########.fr        #
+#    Updated: 2017/11/09 11:16:18 by amansour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ OBJ_PATH = ./obj
 INCLUD  = ./include
 LIB = libft/libft.a
 
-SRC = main.c stocking.c display_point.c\
-	segment.c segment_all.c isometric.c checking.c\
+SRC = main.c display_point.c rotating.c\
+	segment.c draw.c checking.c stocking.c\
 	error.c tools.c hook.c zoom.c\
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(SRC:.c=.o))

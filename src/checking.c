@@ -6,13 +6,13 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 09:04:12 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 09:51:24 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 11:48:33 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void			init_env(t_env *env)
+static void		init_env(t_env *env)
 {
 	env->max_y = 0;
 	env->max_x = 0;
@@ -62,7 +62,7 @@ static void		check_per_line(t_check *c, t_env *env)
 		i -= 1;
 	free(c->rest);
 	c->rest = ft_strdup(c->s1 + i + 1);
-	c->j = (c->rest) ? -1 : 0;    
+	c->j = (c->rest) ? -1 : 0;
 	c->line = ft_strsplit(c->s1, '\n');
 	env->nbry += length(c->line, env) + c->j;
 	i = -1;
@@ -108,6 +108,6 @@ int			checking(int fd, t_env *env)
 	}
 	env->nbry += 1;
 	free(c.str);
-	printf("NBRX = %d\nNBRY = %d\nDimZ = %d\n", env->nbrx, env->nbry, env->dim_z); 
+	printf("NBRX = %d\nNBRY = %d\nDimZ = %d\n", env->nbrx, env->nbry, env->dim_z);
 	return (1);
 }

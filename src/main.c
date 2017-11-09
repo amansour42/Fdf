@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:14:47 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 10:04:18 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 11:51:20 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	main(int ac, char **av)
 	close(fd);
 	fd = ft_open(av[1]);
 	stocking(fd, &env);
-	(!env.pt) ? error(PARSEERROR) : 0;
+	(!(env.pt)) ? error(PARSEERROR) : 0;
 	env.mlx = mlx_init();
-	decale(&(env.pt), env);
 	env.win = mlx_new_window(env.mlx, env.width, env.height, av[1]);
+	decale(&(env.pt), &env);
 	if (env.max_x < 250 && env.max_y < 250)
 		right_zoom(env.pt, 1, &env);
 	draw(&env);

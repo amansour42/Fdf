@@ -6,7 +6,7 @@
 /*   By: amansour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 10:03:36 by amansour          #+#    #+#             */
-/*   Updated: 2017/11/09 10:03:50 by amansour         ###   ########.fr       */
+/*   Updated: 2017/11/09 11:33:54 by amansour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define READERROR	"Read error"
 # define PARSEERROR	"Parse error"
 # define NOTFOUND	"File not found or wrong format"
-# define BUFF       2048
+# define BUFF		2048
 # define GREEN		0x009688
 # define YELLOW		0xfeff77
 # define BLUE		0x4162ff
@@ -99,31 +99,60 @@ typedef struct      s_env
 	int 			exist;
 }					t_env;
 
-int					main(int ac, char **av);
-void				stocking(int fd, t_env *env);
-void				display_point(t_point *point, int n);
-void				segment(t_point pointi, t_point pointf, t_env *env);
-t_point				*isometric(t_point *point, t_env *env, int p, int n);
-void				define_dim(t_env *env, char *str);
-int					checking(int fd, t_env *env);
-void				decale(t_point **point, t_env env);
-int					error(char *s);
-int					ft_open(char *s);
-void				right_zoom(t_point *pt, int n, t_env *env);
-void				zoom_result(t_env *env);
-void				init_env(t_env *env);
-void				isometric_calcul(t_point *point, t_env *env);
-int 				choose_color(int z, t_env *env);
-void				trace(t_env *env);
-int 				draw(t_env *e);
-int					quit(t_env *env);
-void				init_imag(t_env *e);
-int					expose_hook(t_env *e);
-int					key_hook(int keycode, t_env *e);
-int 				zoom(int key, t_env *env);
+/*
+ * tools
+*/
+void				decale(t_point **pt, t_env *env);
+t_point				*dupp(t_point *pt, t_env *env);
+int					choose_color(int z, t_env *e);
+void				isometric_calcul(t_point *pt, t_env *env);
 void				write_one_pixel(t_dot pt, t_env *env, int color);
+
+/*
+ * zoom.c
+*/
+int 				zoom(int key, t_env *env);
+void				right_zoom(t_point *pt, int n, t_env *env);
+
+/*
+ *rotating
+*/
+int					rotate(t_env *env);
+/*
+ * checking and stocking
+*/
 void				clean_split(char **s);
 void				clean(t_check c);
-void				rotate_result(t_env *env);
-int					rotate(t_env *env);
+int					checking(int fd, t_env *env);
+void				stocking(int fd, t_env *env);
+/*
+ * hook
+*/
+
+void				isometric_calcul(t_point *point, t_env *env);
+int					key_hook(int keycode, t_env *e);
+int					expose_hook(t_env *e);
+void				init_imag(t_env *e);
+int					quit(t_env *env);
+/*
+ * error
+*/
+
+void				define_dim(t_env *env, char *str);
+int					ft_open(char *s);
+int					error(char *s);
+
+/*
+ * draw
+*/
+void				trace(t_env *env);
+int 				draw(t_env *e);
+void				segment(t_point i, t_point f, t_env *env);
+/*
+ * main
+ */
+
+int					main(int ac, char **av);
+
+void				display_point(t_point *point, int n);
 #endif
